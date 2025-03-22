@@ -26,7 +26,7 @@ SECRET_KEY = 'om5fb!t!!ld8ytnas+qqy(%3dxx5crmpsg_l^(at()b5^yy#0z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.169.31.203", "*"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -133,5 +133,5 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = "sumanthgm12345@gmail.com"
-EMAIL_HOST_PASSWORD = "dvli dhub goow djds"
+EMAIL_HOST_USER = "emailid@example.com"
+EMAIL_HOST_PASSWORD = "abcd efgh ijkl mnop"
