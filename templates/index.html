@@ -1,0 +1,232 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/background12.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.85);
+            z-index: -1;
+        }
+
+        .content {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: right;
+            z-index: 1;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 5%; /* Moved further to the bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            border: 3px solid white;
+            border-radius: 5px;
+            z-index: 1000;
+            opacity: 1;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.3s ease; /* Smooth transition for fade-out */
+            user-select: none; /* Prevents user accidentally selecting text */
+        }
+
+        .cards-section {
+            position: relative;
+            right: 10%;
+            top: 130%;
+            transform: translateY(-50%);
+            text-align: right;
+            margin-bottom: 600px;
+        }
+
+        .fade-in-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            max-width: 350px;
+            margin-left: auto;
+        }
+
+        .fade-in-card.appeared {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-indicator span {
+            display: inline-block;
+            font-size: 24px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        footer {
+            margin-top: auto;
+            background-color: rgb(255, 255, 255, 0.5);
+        }        
+
+        @media (max-width: 767px) {
+            .background-wrapper {
+                background-position: 31% center;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+            }
+
+            .content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                right: 50%;
+                width: 250px;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .fade-in-card {
+                margin-left: 20%;
+                margin-right: 0%;
+                text-align: center;
+            }
+
+            .cards-section {
+                position: relative;
+                right: 10%;
+                top: 130%;
+                transform: translateY(-50%);
+                text-align: right;
+                margin-bottom: 750px;
+            }
+        }
+    </style>
+
+    <title>Home | WellPred</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="background-wrapper"></div>
+
+    <div class="content">
+        <h1>Welcome to WellPred!</h1>
+        <h3>Predict. Prevent. Protect.</h3>
+        <br><br>
+        <a href="#" style="text-decoration: none; color: white;">
+            <h3>Use our prediction models</h3>
+        </a>
+        <a href="#" style="text-decoration: none; color: white;">
+            <h3>Read our awareness blogs</h3>
+        </a>
+    </div>
+
+    <div class="scroll-indicator" id="scroll-indicator" onclick="scrollToCards()">
+        Scroll Down &#8595;
+    </div>
+
+    <div class="container cards-section" id="cards-section" style="margin-right: 0px; padding-bottom: 80px;">
+        <div class="fade-in-card" style="padding-bottom: 20px;">
+            <div class="card bg-dark text-white border-0 mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Stroke</h5>
+                    <p class="card-text">Access powerful prediction models and insightful awareness blogs for stroke.</p>
+                    <a href="{% url 'strokepage' %}" class="btn btn-primary">Learn more</a>
+                </div>
+            </div>
+        </div>
+        <div class="fade-in-card" style="padding-bottom: 20px;">
+            <div class="card bg-dark text-white border-0 mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Diabetes</h5>
+                    <p class="card-text">Access powerful prediction models and insightful awareness blogs for diabetes.</p>
+                    <a href="{% url 'diabetespage' %}" class="btn btn-primary">Learn more</a>
+                </div>
+            </div>
+        </div>
+        <div class="fade-in-card" style="padding-bottom: 20px;">
+            <div class="card bg-dark text-white border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Student Depression</h5>
+                    <p class="card-text">Access powerful prediction models and insightful awareness blogs for depression.</p>
+                    <a href="{% url 'depressionpage' %}" class="btn btn-primary">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script>
+        function scrollToCards() {
+            document.getElementById('cards-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add fade-in effect for cards
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appeared');
+                }
+            });
+        });
+
+        document.querySelectorAll('.fade-in-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        document.addEventListener('scroll', () => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = window.scrollY;
+    
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            const opacity = 1 - (scrolled / scrollable);
+            scrollIndicator.style.opacity = opacity; // Gradually fade the scroll indicator
+
+            if (Math.ceil(scrolled) >= scrollable) {
+                document.body.classList.add('scrolled-to-bottom');
+            } else {
+                document.body.classList.remove('scrolled-to-bottom');
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    
+</body>
+
+
+
+</html>

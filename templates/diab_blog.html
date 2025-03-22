@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Awareness</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/diabetesbackground1.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .card-header{
+            font-size: 18px;
+            
+        }
+
+        .card-body{
+            font-size: 18px;
+            
+        }
+
+        .quiz-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .heading-bg {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-wrapper"></div>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <div align="center">
+            <h1 class="text-center text-primary heading-bg">📘 Diabetes Awareness</h1>
+        </div>
+        <br>
+        <div class="accordion" id="awarenessAccordion">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                            data-bs-target="#symptoms" style="font-size:18px;">
+                            ⚡ Symptoms of Diabetes
+                        </button>
+                    </h2>
+                </div>
+                <div id="symptoms" class="collapse" data-bs-parent="#awarenessAccordion">
+                    <div class="card-body">
+                        <ul>
+                            <li>Frequent urination</li>
+                            <li>Extreme thirst</li>
+                            <li>Unexplained weight loss</li>
+                            <li>Fatigue and weakness</li>
+                            <li>Blurred vision</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                        data-bs-target="#identify" style="font-size:18px;">
+                        🔍 How to Identify Diabetes
+                    </button>
+                </div>
+                <div id="identify" class="collapse" data-bs-parent="#awarenessAccordion">
+                    <div class="card-body">
+                        <ul>
+                            <li>Frequent blood sugar level tests</li>
+                            <li>Checking for excessive thirst or urination</li>
+                            <li>Sudden weight loss without changes in diet</li>
+                            <li>Increased hunger and fatigue</li>
+                            <li>Slow healing of wounds</li>
+                            <li>Tingling or numbness in hands and feet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                        data-bs-target="#prevention" style="font-size:18px;">
+                        🛡️ How to Prevent Diabetes
+                    </button>
+                </div>
+                <div id="prevention" class="collapse" data-bs-parent="#awarenessAccordion">
+                    <div class="card-body">
+                        <ul>
+                            <li>Maintain a healthy weight</li>
+                            <li>Eat a balanced diet</li>
+                            <li>Exercise regularly</li>
+                            <li>Monitor blood sugar levels</li>
+                            <li>Avoid excessive sugar intake</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                        data-bs-target="#consequences" style="font-size:18px;">
+                        ⚠️ Consequences of Untreated Diabetes
+                    </button>
+                </div>
+                <div id="consequences" class="collapse" data-bs-parent="#awarenessAccordion">
+                    <div class="card-body">
+                        <ul>
+                            <li>Increased risk of heart disease</li>
+                            <li>Kidney failure</li>
+                            <li>Nerve damage</li>
+                            <li>Vision loss</li>
+                            <li>Foot ulcers leading to amputation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-success mt-4" id="quizBtn">🎯 Take the Awareness Quiz</button>
+        <div class="quiz-container mt-3">
+            <h3>📝 Quick Quiz on Diabetes Awareness</h3>
+            <div class="quiz-question" data-answer="Frequent urination">
+                <p><strong>1. What is a common symptom of diabetes?</strong></p>
+                <button class="btn btn-light quiz-option">Frequent urination</button>
+                <button class="btn btn-light quiz-option">Rapid hair growth</button>
+                <p class="quiz-feedback"></p>
+            </div>
+            <div class="quiz-question" data-answer="Kidney failure">
+                <p><strong>2. What organ is at risk if diabetes is untreated?</strong></p>
+                <button class="btn btn-light quiz-option">Kidney failure</button>
+                <button class="btn btn-light quiz-option">Stronger muscles</button>
+                <p class="quiz-feedback"></p>
+            </div>
+            <div class="quiz-question" data-answer="Exercise regularly">
+                <p><strong>3. What helps prevent diabetes?</strong></p>
+                <button class="btn btn-light quiz-option">Eating junk food</button>
+                <button class="btn btn-light quiz-option">Exercise regularly</button>
+                <p class="quiz-feedback"></p>
+            </div>
+            <div class="quiz-question" data-answer="High blood sugar">
+                <p><strong>4. What does diabetes cause?</strong></p>
+                <button class="btn btn-light quiz-option">Low blood sugar</button>
+                <button class="btn btn-light quiz-option">High blood sugar</button>
+                <p class="quiz-feedback"></p>
+            </div>
+            <div class="quiz-question" data-answer="Foot ulcers">
+                <p><strong>5. What is a serious complication of diabetes?</strong></p>
+                <button class="btn btn-light quiz-option">Stronger bones</button>
+                <button class="btn btn-light quiz-option">Foot ulcers</button>
+                <p class="quiz-feedback"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('quizBtn').addEventListener('click', function () {
+            document.querySelector('.quiz-container').style.display = 'block';
+        });
+        document.querySelectorAll('.quiz-question').forEach(question => {
+            question.addEventListener('click', function (e) {
+                if (e.target.classList.contains('quiz-option')) {
+                    let correctAnswer = question.getAttribute('data-answer');
+                    let feedback = question.querySelector('.quiz-feedback');
+                    if (e.target.textContent === correctAnswer) {
+                        feedback.textContent = "✅ Correct!";
+                        feedback.classList.remove('incorrect');
+                        feedback.classList.add('correct');
+                    } else {
+                        feedback.textContent = "❌ Incorrect. Try again!";
+                        feedback.classList.remove('correct');
+                        feedback.classList.add('incorrect');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

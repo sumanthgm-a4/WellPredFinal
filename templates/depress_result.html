@@ -1,0 +1,137 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/depression1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        .content {
+            color: white;
+            padding: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heading-background {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: -20px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 650px;
+            max-width: 100%;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            color: black;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: none;
+            margin: auto;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8); /* Only background is transparent */
+            z-index: -1; /* Push it behind everything */
+            border-radius: 12px; /* Match the card's border radius */
+        }
+
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: none;
+            text-align: center;
+        }
+
+        .card-footer {
+            background-color: #ffffff;
+            /* Solid white background */
+            padding-bottom: 0%;
+            align-items: center;
+        }
+
+        .card-body .row>div {
+            margin-bottom: 1rem;
+        }
+
+        .btn-success {
+            background-color: green;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: darkgreen;
+        }
+    </style>
+
+    <title>Depression Prediction | WellPred</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-wrapper"></div>
+
+    <div class="content">
+        <div class="heading-background">
+            <h2>Student Depression Prediction Result</h2>
+        </div>
+        <p></p>
+
+        <div class="cards-container" >
+            <div class="card" style="align-items: center; padding: 20px; border-radius: 10px;">
+                {% if prediction == 1 %}
+                    <h2 style="color: red;">You're likely to get depression</h2>
+                    <h4 style="color: red;">Please reach out to somebody</h4>
+                {% elif prediction == 0 %}
+                    <h3 style="color: green;">You're not that likely to get depression</h3>
+                {% endif %}
+                <br>    
+                <h3>Prediction probability: {{ prob }}%</h3>
+                <br>
+                <p><a href="{% url 'depressionrecords' %}">View your previous prediction records</a></p>
+                <p>If you'd like to learn more about student depression <a href="#">click here</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

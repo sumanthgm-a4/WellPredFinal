@@ -1,0 +1,233 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/depression1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        .content {
+            color: white;
+            padding: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heading-background {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: -20px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 700px;
+            max-width: 100%;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: none;
+            margin: auto;
+        }
+
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: none;
+            text-align: center;
+        }
+
+        .card-footer {
+            background-color: #ffffff;
+            /* Solid white background */
+            padding-bottom: 0%;
+            align-items: center;
+        }
+
+        .card-body .row>div {
+            margin-bottom: 1rem;
+        }
+
+        .btn-success {
+            background-color: green;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: darkgreen;
+        }
+    </style>
+
+    <title>Depression Prediction | WellPred</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-wrapper"></div>
+
+    <div class="content">
+        <div class="heading-background">
+            <h2>Predict your risk of depression</h2>
+        </div>
+        <p></p>
+
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Fill the Form</h5>
+                </div>
+                <form method="POST" autocomplete="off" class="card-body" style="padding-bottom: 0%;">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" name="age" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cgpa" class="form-label">CGPA</label>
+                                <input type="number" step="0.1" id="cgpa" name="cgpa" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sleep_duration" class="form-label">Sleep Duration</label>
+                                <select id="sleep_duration" name="sleep_duration" class="form-select">
+                                    <option value="2">Less than 5 hours</option>
+                                    <option value="1">7-8 hours</option>
+                                    <option value="0">5-6 hours</option>
+                                    <option value="3">More than 8 hours</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dietary_habits" class="form-label">Dietary Habits</label>
+                                <select id="dietary_habits" name="dietary_habits" class="form-select">
+                                    <option value="0">Healthy</option>
+                                    <option value="1">Moderate</option>
+                                    <option value="3">Unhealthy</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="study_hours" class="form-label">Study Hours</label>
+                                <input type="number" id="study_hours" name="study_hours" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" name="suicidal_thoughts" value="0">
+                                <input type="checkbox" id="suicidal_thoughts" name="suicidal_thoughts" value="1">
+                                <label for="suicidal_thoughts">Suicidal Thoughts?</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label><br>
+                                <input type="radio" id="male" name="gender" value="1"> Male
+                                <input type="radio" id="female" name="gender" value="0"> Female
+                            </div>
+                            <div class="mb-3">
+                                <label for="academic_pressure" class="form-label">Academic Pressure</label> <br>
+                                <input type="range" id="academic_pressure" name="academic_pressure" min="1" max="5">
+                            </div>
+                            <div class="mb-3">
+                                <label for="study_satisfaction" class="form-label">Study Satisfaction</label> <br>
+                                <input type="range" id="study_satisfaction" name="study_satisfaction" min="1" max="5">
+                            </div>
+                            <div class="mb-3">
+                                <label for="academic_pressure" class="form-label">Financial Stress</label> <br>
+                                <input type="range" id="financial_stress" name="financial_stress" min="1" max="5">
+                            </div>
+                            <div class="mb-3">
+                                <label for="family_illness" class="form-label">Family History of Mental
+                                    Illnesses?</label><br>
+                                <input type="radio" id="yes" name="family_illness" value="1"> Yes
+                                <input type="radio" id="no" name="family_illness" value="0"> No
+                            </div>
+                            <div class="mb-3">
+                                <label for="degree" class="form-label">Degree</label>
+                                <select id="degree" name="degree" class="form-select" required>
+                                    <option value="">Select Degree</option>
+                                    <option value="11">Class 12</option>
+                                    <option value="2">B.Ed</option>
+                                    <option value="1">B.Com</option>
+                                    <option value="0">B.Arch</option>
+                                    <option value="7">BCA</option>
+                                    <option value="25">MSc</option>
+                                    <option value="4">B.Tech</option>
+                                    <option value="21">MCA</option>
+                                    <option value="17">M.Tech</option>
+                                    <option value="9">BHM</option>
+                                    <option value="10">BSc</option>
+                                    <option value="15">M.Ed</option>
+                                    <option value="3">B.Pharm</option>
+                                    <option value="14">M.Com</option>
+                                    <option value="6">BBA</option>
+                                    <option value="20">MBBS</option>
+                                    <option value="12">LLB</option>
+                                    <option value="8">BE</option>
+                                    <option value="5">BA</option>
+                                    <option value="16">M.Pharm</option>
+                                    <option value="22">MD</option>
+                                    <option value="19">MBA</option>
+                                    <option value="18">MA</option>
+                                    <option value="27">PhD</option>
+                                    <option value="13">LLM</option>
+                                    <option value="24">MHM</option>
+                                    <option value="23">ME</option>
+                                    <option value="26">Others</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" align="center">
+                        <input type="submit" class="btn btn-success" value="Predict">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const degreeValues = {
+            "Class 12": 11, "B.Ed": 2, "B.Com": 1, "B.Arch": 0, "BCA": 7, "MSc": 25, "B.Tech": 4, "MCA": 21,
+            "M.Tech": 17, "BHM": 9, "BSc": 10, "M.Ed": 15, "B.Pharm": 3, "M.Com": 14, "BBA": 6, "MBBS": 20,
+            "LLB": 12, "BE": 8, "BA": 5, "M.Pharm": 16, "MD": 22, "MBA": 19, "MA": 18, "PhD": 27, "LLM": 13,
+            "MHM": 24, "ME": 23, "Others": 26
+        };
+
+        document.getElementById("degree").addEventListener("change", function () {
+            let selectedDegree = this.value;
+            if (degreeValues[selectedDegree] !== undefined) {
+                this.value = degreeValues[selectedDegree]; // Replace text with value
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

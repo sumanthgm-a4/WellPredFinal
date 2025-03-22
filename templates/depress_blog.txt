@@ -1,0 +1,183 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Depression Awareness Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      color: #000000; /* All text set to black */
+    }
+
+    .container {
+      max-width: 800px;
+      margin-top: 20px;
+    }
+
+    .highlight {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .accordion-button {
+      background-color: #e9f7fe;
+      color: #000000; /* Text color in the accordion button */
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+    }
+
+    .accordion-item {
+      margin-bottom: 10px;
+      border: 1px solid #e1f5fe;
+      border-radius: 8px;
+    }
+
+    .accordion-body {
+      background-color: #e3f2fd;
+      color: #000000; /* Text color in the accordion body */
+    }
+
+    h1 {
+      color: #007bff;
+    }
+
+    .accordion-button::after {
+      content: "\f078"; /* Font Awesome down arrow */
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      float: right;
+      font-size: 16px;
+    }
+
+    .accordion-button.collapsed::after {
+      content: "\f077"; /* Font Awesome up arrow */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-5" style="color: #000000;">Student Depression Awareness Blog</h1>
+
+    <div class="accordion" id="depressionAccordion">
+
+      <!-- How to Identify -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne" data-bs-parent="#depressionAccordion">
+            How to Identify Depression
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+          <div class="accordion-body">
+            Depression can show up in different ways. Some signs include:
+            <ul>
+              <li>Persistent sadness or feelings of hopelessness</li>
+              <li>Loss of interest in activities</li>
+              <li>Fatigue and lack of energy</li>
+              <li>Difficulty concentrating or making decisions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Symptoms -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo" data-bs-parent="#depressionAccordion">
+            Symptoms
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+          <div class="accordion-body">
+            Common symptoms of depression include:
+            <ul>
+              <li>Feelings of sadness, emptiness, or hopelessness</li>
+              <li>Social withdrawal and isolation</li>
+              <li>Difficulty sleeping or sleeping too much</li>
+              <li>Significant changes in appetite or weight</li>
+              <li>Thoughts of death or suicide (Seek help immediately if you experience this)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preventive Care -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+            aria-expanded="false" aria-controls="collapseThree" data-bs-parent="#depressionAccordion">
+            Preventive Care
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+          <div class="accordion-body">
+            Taking care of your mental health includes:
+            <ul>
+              <li>Getting regular exercise and sleep</li>
+              <li>Eating a balanced diet</li>
+              <li>Engaging in activities that promote relaxation, like meditation or yoga</li>
+              <li>Setting realistic goals and breaking tasks into smaller, manageable steps</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who to Reach Out To -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+            aria-expanded="false" aria-controls="collapseFour" data-bs-parent="#depressionAccordion">
+            Who to Reach Out To
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+          <div class="accordion-body">
+            If you're feeling overwhelmed, consider reaching out to:
+            <ul>
+              <li>Your school's counseling services</li>
+              <li>A trusted friend or family member</li>
+              <li>Mental health professionals, like therapists or psychologists</li>
+              <li>24/7 helplines such as the <strong>Crisis Text Line</strong> or <strong>National Suicide Prevention Lifeline</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Ensure that only one accordion can be open at a time
+    const accordions = document.querySelectorAll('.accordion-button');
+
+    accordions.forEach(button => {
+      button.addEventListener('click', function () {
+        accordions.forEach(otherButton => {
+          if (otherButton !== button) {
+            const collapse = new bootstrap.Collapse(otherButton.getAttribute('data-bs-target'), {
+              toggle: false
+            });
+            collapse.hide();
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

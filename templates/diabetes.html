@@ -1,0 +1,146 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        /* Background image wrapper */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/diabetesbackground1.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        /* Content container */
+        .content {
+            color: white;
+            padding: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Heading background for contrast */
+        .heading-background {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Cards container layout */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        /* Individual card styles */
+        .card {
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.85) !important; /* Translucent white */
+            color: black !important; /* Ensure text is visible */
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: none;
+        }
+
+        /* Card header */
+        .card-header {
+            background-color: rgba(255, 255, 255, 0.85) !important; /* Match translucency */
+            border-bottom: none;
+        }
+
+        /* Card footer */
+        .card-footer {
+            background-color: rgba(255, 255, 255, 0.85) !important; /* Match translucency */
+        }
+
+        /* Button styles */
+        .btn-success {
+            background-color: green;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: darkgreen;
+        }
+    </style>
+
+    <title>Diabetes | WellPred</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Background Image -->
+    <div class="background-wrapper"></div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <div class="heading-background">
+            <h1>Welcome to Diabetes Awareness & Prediction</h1>
+        </div>
+        <p style="padding-bottom: 30px;"></p>
+
+        <!-- Cards Section -->
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Read Awareness Blogs</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Learn how to lower your risk of diabetes with lifestyle tips.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'diabetesblog' %}" class="btn btn-success">Read Blogs</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Try Our ML Model</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Predict your diabetes risk using advanced ML models.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'diabetespredict' %}" class="btn btn-success">Use Model</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" align="center">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

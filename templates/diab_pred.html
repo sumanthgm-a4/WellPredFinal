@@ -1,0 +1,190 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'images/diabetesbackground1.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        .content {
+            color: white;
+            padding: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heading-background {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: -20px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .messages-container {
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+        }
+
+        .card {
+            width: 700px;
+            max-width: 100%;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: none;
+            margin: auto;
+        }
+
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: none;
+        }
+
+        .card-body .row>div {
+            margin-bottom: 1rem;
+            padding-bottom: 0%;
+        }
+
+        .card-footer {
+            background-color: #ffffff;
+            padding-bottom: 0%;
+            align-items: center;
+        }
+
+        .btn-success {
+            background-color: green;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: darkgreen;
+        }
+
+        @media (max-width: 768px) {
+            .row>div {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+
+    <title>Diabetes Prediction | WellPred</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="background-wrapper"></div>
+
+    <div class="content">
+        <div class="heading-background">
+            <h2>Predict your risk of diabetes</h2>
+        </div>
+        <p style="padding-bottom: 10px;"></p>
+
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" align="center">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="cards-container">
+            <div class="card" style="padding-bottom: 0px;">
+                <div class="card-header" style="text-align: center;">
+                    <h5 class="card-title">Fill the Form</h5>
+                </div>
+                <form method="POST" autocomplete="off" class="card-body" style="padding-bottom: 0%;">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" name="age" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="height" class="form-label">Height (meters)</label>
+                                <input type="number" step="0.01" id="height" name="height" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="weight" class="form-label">Weight (kg)</label>
+                                <input type="number" step="0.1" id="weight" name="weight" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="blood_glucose_level" class="form-label">Blood Glucose Level</label>
+                                <input type="number" step="0.1" id="blood_glucose_level" name="blood_glucose_level" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label><br>
+                                <input type="radio" id="male" name="gender" value="1"> Male
+                                <input type="radio" id="female" name="gender" value="0"> Female
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" name="hypertension" value="0">
+                                <input type="checkbox" id="hypertension" name="hypertension" value="1">
+                                <label for="hypertension">Hypertension Present?</label>
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" name="heart_disease" value="0">
+                                <input type="checkbox" id="heart_disease" name="heart_disease" value="1">
+                                <label for="heart_disease">Heart Disease Present?</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="smoking_history" class="form-label">Smoking History</label>
+                                <select id="smoking_history" name="smoking_history" class="form-select">
+                                    <option value="4">Never Smoked</option>
+                                    <option value="3">Former Smoker</option>
+                                    <option value="1">Current Smoker</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div align="center" class="card-footer">
+                        <input type="submit" class="btn btn-success" value="Predict">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

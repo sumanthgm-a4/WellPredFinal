@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg" style="padding-bottom: 0%; padding-top: 0%; border-bottom: 5px solid rgba(0, 0, 0, 0.2); box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">
+    <div class="container-fluid" style="background-color: #90b3c4; padding-top: 10px; padding-bottom: 5px;">
+        <!-- Brand -->
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            <h3 style="color: beige; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);"><strong>🏥 WellPred</strong></h3>
+        </a>
+
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <div style="background-color: beige; border: 10px; border-radius: 10px;">
+                        <h6 align="center" style="padding: 10px; color: #607D8B;">
+                            Hello <strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong>
+                        </h6>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+
+            <!-- Right-aligned Buttons -->
+            <ul class="navbar-nav ms-auto">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'logoutuser' %}" class="nav-link">
+                        <button class="btn shadow" type="submit" style="box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); background-color: #607D8B; color: white">Logout</button>
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'loginuser' %}" class="nav-link">
+                        <button class="btn shadow" type="submit" style="box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); background-color: #607D8B; color: white">Sign in</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'registerpage' %}" class="nav-link">
+                        <button class="btn shadow" type="submit" style="box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); background-color: #607D8B; color: white">Register</button>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,166 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Awareness</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .accordion-button {
+            background-color: #a2cffe;
+            color: #003366;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #85c1e9;
+        }
+
+        .accordion-body {
+            background-color: #e6f7ff;
+        }
+
+        .alert {
+            background-color: #cce5ff;
+            color: #004085;
+            border-color: #b8daff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Stroke Awareness: Recognizing, Preventing, and Managing Stroke</h1>
+        <p>A stroke happens when blood flow to a part of the brain is cut off, depriving brain cells of oxygen and nutrients. This can cause severe damage and requires immediate medical attention.</p>
+
+        <div class="accordion" id="strokeAccordion">
+
+            <!-- What is a Stroke? -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        What is a Stroke?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#strokeAccordion">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><b>Ischemic Stroke</b> – Caused by blocked arteries (most common).</li>
+                            <li><b>Hemorrhagic Stroke</b> – Caused by a blood vessel rupture.</li>
+                            <li><b>Transient Ischemic Attack (TIA)</b> – A "mini-stroke" with temporary symptoms.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Identify -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        How to Identify a Stroke – <span class="highlight">&nbsp;F.A.S.T.&nbsp;</span> Method
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#strokeAccordion">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><b>F – Face Drooping:</b> One side of the face may droop.</li>
+                            <li><b>A – Arm Weakness:</b> Sudden weakness or numbness in one arm.</li>
+                            <li><b>S – Speech Difficulty:</b> Slurred or strange speech.</li>
+                            <li><b>T – Time to Call Emergency Services:</b> Call for help immediately!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preventive Care -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        Preventive Care: Lower Your Risk
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#strokeAccordion">
+                    <div class="accordion-body">
+                        <p>While some risk factors can’t be changed, lifestyle modifications can significantly reduce stroke risk:</p>
+                        <ul>
+                            <li>Manage <b>Blood Pressure</b>: Reduce salt intake and exercise regularly.</li>
+                            <li>Control <b>Diabetes</b>: Monitor glucose levels and follow a healthy diet.</li>
+                            <li>Quit <b>Smoking</b> & Limit <b>Alcohol</b>: Both increase stroke risk.</li>
+                            <li>Stay <b>Physically Active</b>: Aim for 30 minutes of exercise 5 times a week.</li>
+                            <li>Maintain a <b>Healthy Diet</b>: Focus on whole grains, lean proteins, and fruits & vegetables.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Diet -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                        aria-expanded="false" aria-controls="collapseFour">
+                        Recommended Diet for Stroke Prevention
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#strokeAccordion">
+                    <div class="accordion-body">
+                        <ul>
+                            <li><b>Eat More:</b> Fruits, vegetables, whole grains, lean proteins, nuts, and seeds.</li>
+                            <li><b>Avoid:</b> Processed foods, excessive salt, sugary drinks, and trans fats.</li>
+                            <li>Drink plenty of water and limit sugary drinks.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Living After a Stroke -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                        aria-expanded="false" aria-controls="collapseFive">
+                        Living After a Stroke
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#strokeAccordion">
+                    <div class="accordion-body">
+                        <p>Recovery varies per person, but rehabilitation may include:</p>
+                        <ul>
+                            <li>Physical therapy to regain movement.</li>
+                            <li>Speech therapy for communication issues.</li>
+                            <li>Support groups for emotional well-being.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Alert -->
+            <div class="accordion-item" style="padding: 20px; padding-bottom: 7px;">
+                <div class="accordion-body alert text-center" role="alert">
+                    If you or a loved one experiences stroke symptoms, <b>seek emergency help immediately!</b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
