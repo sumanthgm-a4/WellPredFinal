@@ -103,7 +103,7 @@
                             <td>{{ record.heart_disease|yesno:"Yes,No" }}</td>
                             <td>{{ record.get_smoking_status_display }}</td>
                             <td>{{ record.bmi }}</td>
-                            <td>{{ record.glucose_level }}</td>
+                            <td>{{ record.glucose_level}}</td>
                             <td style="font-weight: bold; color: {% if record.prediction == 1 %}red{% else %}green{% endif %};">
                                 {{ record.get_prediction_display }}
                             </td>

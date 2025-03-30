@@ -109,7 +109,7 @@
                             <td>{{ record.get_residence_type_display }}</td>
                             <td>{{ record.glucose_level }}</td>
                             <td>{{ record.bmi }}</td>
-                            <td>{{ record.get_smoking_status_display }}</td>
+                            <td>{{ record.get_smoking_status_display|yesno:"Yes,No" }}</td>
                             <td style="font-weight: bold; color: {% if record.prediction == 1 %}red{% else %}green{% endif %};">
                                 {{ record.get_prediction_display }}
                             </td>

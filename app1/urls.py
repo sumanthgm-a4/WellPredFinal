@@ -27,4 +27,5 @@ urlpatterns = [
     path(route="depression/records", view=render_depression_records, name="depressionrecords"),
     
     path(route="contact", view=render_contact, name="contact"),
+    path(route="otp", view=render_otp, name="verify_otp"),
 ]

@@ -134,4 +134,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = "sumanthgm12345@gmail.com"
-EMAIL_HOST_PASSWORD = "dvli dhub goow djds"
+EMAIL_HOST_PASSWORD = "ewyl sjxd zhlb bztt"

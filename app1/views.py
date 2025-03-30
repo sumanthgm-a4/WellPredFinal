@@ -1,5 +1,5 @@
-import os
 import joblib
+from random import randint
 import numpy as np
 from pathlib import Path
 from django.core.mail import send_mail, EmailMessage
@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.utils import IntegrityError
 from .models import *
 
 
@@ -39,11 +40,13 @@ def render_register(request):
         if cpword != pword:
             messages.error(request, "Passwords don't match")
             return redirect("registerpage")
-        new_user = User(username=emailid, email=emailid, first_name=firstname, last_name=lastname)
-        new_user.set_password(pword)
-        new_user.save()
-        messages.success(request, f"User successfully created")
-        return redirect("loginuser")
+        send_otp(request=request, email=emailid, user_details={
+            'fname': firstname,
+            'lname': lastname,
+            'email': emailid,
+            'passw': pword,
+        })
+        return redirect("verify_otp")
     
     return render(request, "register.html")
 
@@ -82,6 +85,7 @@ def render_stroke(request):
     return render(request, "stroke.html")
 
 
+@login_required(login_url="loginuser")
 def render_stroke_predict(request):
     
     if request.method == "POST":
@@ -178,6 +182,7 @@ def render_diabetes(request):
     return render(request, "diabetes.html")
 
 
+@login_required(login_url="loginuser")
 def render_diabetes_predict(request):
         
     if request.method == "POST":
@@ -228,7 +233,7 @@ def render_diabetes_predict(request):
             smoking_status=smoking_status,  # 1, 3, or 4 based on SMOKING_CHOICES
             bmi=bmi,              # Float value
             glucose_level=glucose_level,  # Float value
-            prediction=0          # Example: 0 for Negative, 1 for Positive
+            prediction=prediction        # Example: 0 for Negative, 1 for Positive
         )
         diabetes_record.save()
 
@@ -268,6 +273,7 @@ def render_depression(request):
     return render(request, "depression.html")
 
 
+@login_required(login_url="loginuser")
 def render_depression_predict(request):
     
     if request.method == "POST":
@@ -368,7 +374,7 @@ def render_contact(request):
         name = request.user.first_name + " " + request.user.last_name
         send_mail(
             subject=f"Mail from {name}",
-            message=message+f"\n\n\n\nMail sent by <{email}>",
+            message=message+f"\n\nMail sent by <{email}>",
             from_email=email,
             recipient_list=["214g1a32a4@srit.ac.in"],
             fail_silently=False
@@ -382,3 +388,46 @@ def render_contact(request):
     return render(request=request, template_name="contact.html")
 
 
+def send_otp(request, email, user_details):
+    
+    otp = str(randint(100000, 999999))
+    request.session['otp'] = otp
+    request.session['user_details'] = user_details
+    send_mail(from_email='sumanthgm12345@gmail.com', 
+        subject=f"OTP for {email}", 
+        message=otp, 
+        recipient_list=[email], 
+        fail_silently=False)
+    
+    return
+
+
+def render_otp(request):
+    
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        if entered_otp is None:
+            messages.error(request, 'OTP is required')
+            return render(request, "otp.html", {'error': 'OTP is required'})
+
+        if entered_otp == request.session.get('otp'):
+            user_details = request.session.get('user_details')
+            try:
+                user = User.objects.create_user(
+                    username=user_details['email'],
+                    password=user_details['passw'],
+                    email=user_details['email'],
+                    first_name=user_details['fname'],
+                    last_name=user_details['lname'],
+                )
+                user.save()
+                messages.success(request, 'User registered successfully')
+                request.session.clear()
+                return redirect("loginuser")
+            except IntegrityError:
+                return render(request, "otp.html", {'error': 'An error occurred while creating the user'})
+        else:
+            messages.error(request, 'Invalid OTP')
+            return render(request, "otp.html", {'error': 'Invalid OTP'})
+    else:
+        return render(request, "otp.html")

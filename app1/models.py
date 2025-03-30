@@ -129,7 +129,7 @@ class DepressionRecord(models.Model):
     ]
     PREDICTION_CHOICES = [
         (1, "Positive"),
-        (2, "Negative")
+        (0, "Negative")
     ]
     
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
